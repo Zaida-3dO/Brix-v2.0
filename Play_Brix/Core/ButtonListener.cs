@@ -18,33 +18,38 @@ namespace Play_Brix
         Tile clicked;
         Tile stored;
         bool hasStored;
-        Mover mover;
         public ButtonListener(Board board)
         {
             this.board = board;
-            mover = new Mover();   
         }
-        public void TileClicked(string TileClicked)
+        public EventHandler TileClicked(string TileClicked,TextView TV)
         {
-            clicked = board.tile[TileClicked];
-            //Clicked on the color to play
-            //and if it's not empty
-            if ((!clicked.IsEmpty)&&(board.whiteToPlay == clicked.Piece.IsWhite))
+            
+            return delegate {
+                clicked = board.tile[TileClicked];
+                View.HighlightAll(board, clicked);
+                //Clicked on the color to play
+                //and if it's not empty
+                if ((!clicked.IsEmpty)&&(board.whiteToPlay == clicked.Piece.IsWhite))
             {
                 stored = clicked;
-                hasStored = false;
+                hasStored = true;
+                    TV.Text = "Stored "+stored.Piece.Notation+" in " + stored.TileName;
+
             }else if (hasStored){
-                    if (stored.Piece.PossibleMoves.Contains(clicked))
-                    {
-                        mover.Move(board, stored, clicked);
-                        //refresh(Show possible moves of currently .stored)
-                        //move board piece from and to
-                    }
+                    TV.Text = "Trying to move " + stored.Piece.Notation + " from " + stored.TileName + " to " + clicked.TileName+"Switching turn";
+            //        board.whiteToPlay = !board.whiteToPlay;
+
+             //       if (stored.Piece.PossibleMoves.Contains(clicked)){
+                        board.Move( stored, clicked);
+              //      }
                     stored = null;
                     hasStored = false;
              }
-               
-            }
+                View.Refresh(board);
+                board.Revalidate();
+            };
+        }
         public EventHandler TileClickedTest(ImageButton TileClicked,TextView TV)
         {
             return delegate { TV.Text= TileClicked.Id.ToString(); };

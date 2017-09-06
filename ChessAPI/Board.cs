@@ -12,25 +12,30 @@ using Android.Widget;
 
 namespace ChessAPI
 {
-    public class Board 
+    public class Board
     {
         //public Tile[,] State;
-        public List<List<Tile>> tiles;
-        public Dictionary<string,Tile> tile;
+        // public List<List<Tile>> tiles;
+        public Dictionary<string, Tile> tile;
         public bool whiteToPlay;
         public HashSet<Piece> CapturedPieces;
-        public Board(){
+        public Board()
+        {
+            whiteToPlay = true;
+            //tiles = new List<List<Tile>>();
+            tile = new Dictionary<string, Tile>();
+            CapturedPieces = new HashSet<Piece>();
             //State = new Tile[8,8];
-            Tile a8 = new Tile(8,1,new Rook(false));
+            Tile a8 = new Tile(8, 1, new Rook(false));
             Tile b8 = new Tile(8, 2, new Knight(false));
             //TODO setcolor in piec2 constructor
             //set piece to be set internally by moveto function in tile
-            List<Tile> file = new List<Tile>
-            {
-                a8,
-                b8
-              //  new Tile(1, 1, new Knight(true))
-            };
+            /*   List<Tile> file = new List<Tile>
+               {
+                   a8,
+                   b8
+                 //  new Tile(1, 1, new Knight(true))
+               };*/
             tile.Add(a8.TileName, a8);
             tile.Add(b8.TileName, b8);
             //...
@@ -38,11 +43,11 @@ namespace ChessAPI
 
 
             //Make em
-            Tile c8 = new Tile(8, 3, new Bishop(false));
+            Tile c8 = new Tile(8, 3, true, new Bishop(false));
             Tile d8 = new Tile(8, 4, new Queen(false));
             Tile e8 = new Tile(8, 5, new King(false));
             Tile f8 = new Tile(8, 6, new Bishop(false));
-            Tile g8 = new Tile(8, 7, new Knight(false));
+            Tile g8 = new Tile(8, 7, true, new Knight(false));
             Tile h8 = new Tile(8, 8, new Rook(false));
             tile.Add(c8.TileName, c8);
             tile.Add(d8.TileName, d8);
@@ -57,7 +62,7 @@ namespace ChessAPI
                 tile.Add(bPawns.TileName, bPawns);
                 tile.Add(wPawns.TileName, wPawns);
             }
-            for(int i = 3; i <= 6; i++)
+            for (int i = 3; i <= 6; i++)
             {
                 for (int j = 1; j <= 8; j++)
                 {
@@ -67,11 +72,11 @@ namespace ChessAPI
             }
             Tile a1 = new Tile(1, 1, new Rook(true));
             Tile b1 = new Tile(1, 2, new Knight(true));
-            Tile c1 = new Tile(1, 3, new Bishop(true));
+            Tile c1 = new Tile(1, 3, true, new Bishop(true));
             Tile d1 = new Tile(1, 4, new Queen(true));
             Tile e1 = new Tile(1, 5, new King(true));
             Tile f1 = new Tile(1, 6, new Bishop(true));
-            Tile g1 = new Tile(1, 7, new Knight(true));
+            Tile g1 = new Tile(1, 7, true, new Knight(true));
             Tile h1 = new Tile(1, 8, new Rook(true));
             tile.Add(a1.TileName, a1);
             tile.Add(b1.TileName, b1);
@@ -82,13 +87,46 @@ namespace ChessAPI
             tile.Add(g1.TileName, g1);
             tile.Add(h1.TileName, h1);
         }
-        public Board(List<List<Tile>> tiles,bool whiteToPlay)
+        public Board(List<List<Tile>> tiles, bool whiteToPlay)
         {
-            
+            this.whiteToPlay = whiteToPlay;
+            tile = new Dictionary<string, Tile>();
+            CapturedPieces = new HashSet<Piece>();
+            foreach (List<Tile> b in tiles)
+            {
+                foreach (Tile a in b)
+                {
+                    tile.Add(a.TileName, a);
+                }
+            }
         }
         public Board(Board oldBoard)
         {
             //TODO DeepCopy
+        }
+        public void Move(Tile from, Tile to)
+        {
+            Revalidate(from);
+            if (to.CanCaptureEnpassant || (to.CanCastle && (from.Piece.Notation == 'K')))
+            {
+                //TODO Enpassant and Castle
+            }
+         //   if (from.Piece.PossibleMoves.Contains(to))
+          //  {
+                from.MoveTo(to);
+                whiteToPlay = !whiteToPlay;
+                //TODO ensure enpassant and castle still intact
+         //   }
+         //TODO store move history{Anotte move, dont forget check&Mate}
+         //
+        }
+        public void Revalidate() {
+            //Revalidate all;  
+            //is white and black safe on each possible tile;
+        }
+        public void Revalidate(Tile t1)
+        {
+            //Revalidate this piece
         }
     }
 }
