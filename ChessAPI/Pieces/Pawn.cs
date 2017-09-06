@@ -7,6 +7,7 @@ namespace ChessAPI
 {
     public class Pawn : Piece
     {
+            public Pawn(bool isWhite) : base(isWhite,'P') { }
 
         public override void CalculatePossibleMoves(Tile location, Board board, bool store) { }
 

@@ -7,7 +7,7 @@ namespace ChessAPI
 {
     public class King : Piece
     {
-
+        public King(bool isWhite) : base(isWhite,'K') { }
         public override void CalculatePossibleMoves(Tile location, Board board, bool store) { }
 
 

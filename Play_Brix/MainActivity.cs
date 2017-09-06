@@ -21,6 +21,9 @@ namespace Play_Brix
             TextView inn = (TextView)FindViewById(Resource.Id.textView1);
             yourBtn.Click += delegate { inn.Text = count + ""; count++; };
             inn.Click += delegate { inn.Text = count + ""; count++; };
+            ButtonListener buttonListener = new ButtonListener(new Board());
+            inn.Click += buttonListener.TileClickedTest(yourBtn,inn);
+            
       //      ImageButton yourBtn = (ImageButton)FindViewById(Resource.Id.ai7);
           
         }

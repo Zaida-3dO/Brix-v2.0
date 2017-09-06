@@ -21,11 +21,12 @@ namespace Play_Brix
         Mover mover;
         public ButtonListener(Board board)
         {
+            this.board = board;
             mover = new Mover();   
         }
-        public void TileClicked(ImageButton TileClicked)
+        public void TileClicked(string TileClicked)
         {
-            clicked = TileFrom(TileClicked);
+            clicked = board.tile[TileClicked];
             //Clicked on the color to play
             //and if it's not empty
             if ((!clicked.IsEmpty)&&(board.whiteToPlay == clicked.Piece.IsWhite))
@@ -44,10 +45,11 @@ namespace Play_Brix
              }
                
             }
-        
-        public Tile TileFrom(ImageButton TileClicked)
+        public EventHandler TileClickedTest(ImageButton TileClicked,TextView TV)
         {
-            return null;
+            return delegate { TV.Text= TileClicked.Id.ToString(); };
         }
+
+           
     }
 }

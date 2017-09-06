@@ -7,6 +7,7 @@ namespace ChessAPI
 {
     public class Bishop : Piece
     {
+        public Bishop(bool isWhite) : base(isWhite,'B') { }
 
         public override void CalculatePossibleMoves(Tile location, Board board, bool store) { }
 
