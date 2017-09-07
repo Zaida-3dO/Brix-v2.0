@@ -15,20 +15,37 @@ namespace Play_Brix
 {
     public class View
     {
-        public static List<ImageButton> btnList;
-        public static void Refresh(Board board)
+        public Dictionary<ImageButton, Tile> btnMap;
+        public List<ImageButton> btnList;
+        public Board board;
+        public View(Board b,List<ImageButton> i)
+        {
+            btnList = i;
+            board = b;
+            btnMap = new Dictionary<ImageButton, Tile>();
+            foreach(ImageButton ib in i)
+            {
+                btnMap.Add(ib, b.GetTile(NameOfId(ib.Id)));
+            }
+        }
+        public View(Board b,View v):this(b,v.btnList){}
+
+      
+        public void Refresh()
         {
             foreach (ImageButton btn in btnList)
             {
-                Tile square = board.tile[NameOfId(btn.Id)];
-                btn.SetImageResource(ImageFor(square));
+                btn.SetImageResource(ImageFor(btnMap[btn]));
             }
         }
+
+        //Public void change tile colors
+
+        //Platform Specific Code, if Images are Updated, Update Here
         static int ImageFor(Tile tile)
         {
             if (tile.IsEmpty)
             {
-                //TODO HighLighted
                 if (tile.IsHighlighted)
                 {
                     return 2130837511;
@@ -91,12 +108,6 @@ namespace Play_Brix
             return file + "" + rank;
 
         }
-        public static void HighlightAll(Board b,Tile t)
-        {
-            foreach(Tile tt in b.tile.Values.ToArray())
-            {
-                tt.IsHighlighted = (!t.IsEmpty && t.Piece.PossibleMoves.Contains(tt));
-            }
-        }
+        
     }
 }

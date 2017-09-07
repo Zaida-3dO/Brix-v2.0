@@ -22,7 +22,7 @@ namespace ChessAPI
                 this._fileAsNum = file;
                 this._file = Let(file);
                 _isEmpty = true;
-                _enPassant = false;
+                CanCaptureEnpassant = false;
                 _canCastle = false;
                 IsHighlighted = false;
                 _tileName = _file + "" + rank;
@@ -73,8 +73,7 @@ namespace ChessAPI
         /// <value>
         ///   <c>true</c> if this instance can capture enpassant; otherwise, <c>false</c>.
         /// </value>
-        public bool CanCaptureEnpassant { get { return _enPassant; } }
-        bool _enPassant;
+        public bool CanCaptureEnpassant { get; set; }
         /// <summary>
         /// Gets a value indicating whether this Tile is highlighted, for display purposes, e.g possible move highlighting.
         /// </summary>
@@ -131,12 +130,31 @@ namespace ChessAPI
         /// </value>
         public bool CanCastle { get { return _canCastle; } }
         bool _canCastle;
+        public void LostCastleRights() { if(_canCastle)_canCastle = false; }
 
 
 
         // public Tuple<bool,bool> IsHesafe;
-        public bool IsWhiteSafeHere { get; set; }
-        public bool IsBlackSafeHere { get; set; }
+        public bool IsWhiteSafeHere { get { return _isWhiteSafe; } }
+        bool _isWhiteSafe;
+        public bool IsBlackSafeHere { get { return _isBlackSafe; } }
+        bool _isBlackSafe;
+        public void NotSafeFor(bool NotSafeForWhite)
+        {
+            if (NotSafeForWhite)
+            {
+                _isWhiteSafe = false;
+            }
+            else
+            {
+                _isBlackSafe = false;
+            }
+        }
+        public void SafetyReset()
+        {
+            _isBlackSafe = true;
+            _isWhiteSafe = true;
+        }
         public static char Let(int num)
         {
             switch (num)
@@ -166,6 +184,13 @@ namespace ChessAPI
             this._piece = null;
             _isEmpty = true;
             
+
+        }
+        public void MoveTo()
+        {
+            this._piece = null;
+            _isEmpty = true;
+
 
         }
         private void Play(Piece p)

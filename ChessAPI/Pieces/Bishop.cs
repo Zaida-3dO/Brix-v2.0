@@ -9,8 +9,11 @@ namespace ChessAPI
     {
         public Bishop(bool isWhite) : base(isWhite,'B') { }
 
-        public override void CalculatePossibleMoves(Tile location, Board board, bool store) { }
+        public override void CalculatePossibleMoves(Tile location, Board board) { }
 
-
+        public override HashSet<Tile> FindPossibleMoves(Tile location, Board board)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

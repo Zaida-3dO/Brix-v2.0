@@ -16,32 +16,26 @@ namespace Play_Brix
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            /*
-            ImageButton yourBtn = (ImageButton)FindViewById(Resource.Id.ai7);
-            yourBtn.Click += delegate { yourBtn.SetImageResource(Resource.Drawable.bluepawn); };
-            yourBtn = (ImageButton)FindViewById(Resource.Id.imageImageButton1);
-           
-            yourBtn.Click += delegate { inn.Text = count + ""; count++; };
-            inn.Click += delegate { inn.Text = count + ""; count++; };
-            
-            inn.Click += buttonListener.TileClickedTest(yourBtn,inn);*/
+            //Tests
             ImageButton yourBtn = (ImageButton)FindViewById(Resource.Id.imageImageButton1);
             TextView inn = (TextView)FindViewById(Resource.Id.textView1);
-
+            ButtonListener bl = new ButtonListener(null);
+            yourBtn.Click += bl.TileClickedTest(yourBtn, inn);
+            //SetUp View
             Board board = new Board();
-            ButtonListener buttonListener = new ButtonListener(board);
-            yourBtn.Click += buttonListener.TileClickedTest(yourBtn, inn);
             List<ImageButton> btnList = new List<ImageButton>();
             for (int i = 2131034113;i<= 2131034176; i++)
+                btnList.Add((ImageButton)FindViewById(i));
+            View view = new View(board, btnList);
+            //Button Listner
+            ButtonListener buttonListener = new ButtonListener(view);
+            foreach (ImageButton tileBtn in view.btnList)
             {
-                ImageButton tileBtn = (ImageButton)FindViewById(i);
-                btnList.Add(tileBtn);
-                tileBtn.Click+= buttonListener.TileClicked(View.NameOfId(i),inn);
+                tileBtn.SoundEffectsEnabled = false;
+                tileBtn.Click += buttonListener.TileClicked(tileBtn);
             }
-            View.btnList = btnList;
-            View.Refresh(board);
-            //Create a image view object class with the image views in a dictionary <imageview ,Tile>
-      //    ImageButton yourBtn = (ImageButton)FindViewById(Resource.Id.ai7);
+            //startGame
+            view.Refresh();
         }
        
     }

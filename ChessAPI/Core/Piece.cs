@@ -35,9 +35,10 @@ namespace ChessAPI
         /// <value>
         /// The possible moves.
         /// </value>
+        //TODO encapsulate
         public HashSet<Tile> PossibleMoves { get { return _possibleMoves; } }
         protected HashSet<Tile> _possibleMoves;
-        public abstract void CalculatePossibleMoves(Tile location, Board board, bool store);
-
+        public abstract void CalculatePossibleMoves(Tile location, Board board);
+        public abstract HashSet<Tile> FindPossibleMoves(Tile location, Board board);
     }
 }

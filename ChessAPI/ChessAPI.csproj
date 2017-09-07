@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Core\Move.cs" />
     <Compile Include="Core\Participant.cs" />
     <Compile Include="Core\Piece.cs" />
     <Compile Include="Notations\FEN.cs" />

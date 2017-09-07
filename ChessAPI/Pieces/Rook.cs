@@ -8,7 +8,12 @@ namespace ChessAPI
     public class Rook : Piece
     {
         public Rook(bool isWhite) : base(isWhite,'R') { }
-        public override void CalculatePossibleMoves(Tile location, Board board, bool store) { }
+        public override void CalculatePossibleMoves(Tile location, Board board) { }
+
+        public override HashSet<Tile> FindPossibleMoves(Tile location, Board board)
+        {
+            throw new NotImplementedException();
+        }
 
 
     }

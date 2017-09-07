@@ -14,40 +14,35 @@ namespace Play_Brix
 {
     public class ButtonListener
     {
-        Board board;
+        View view;
         Tile clicked;
         Tile stored;
         bool hasStored;
-        public ButtonListener(Board board)
-        {
-            this.board = board;
+        public ButtonListener(View view){
+            this.view = view;
         }
-        public EventHandler TileClicked(string TileClicked,TextView TV)
+        public EventHandler TileClicked(ImageButton tileBtn)
         {
             
             return delegate {
-                clicked = board.tile[TileClicked];
-                View.HighlightAll(board, clicked);
+                clicked = view.btnMap[tileBtn];
                 //Clicked on the color to play
                 //and if it's not empty
-                if ((!clicked.IsEmpty)&&(board.whiteToPlay == clicked.Piece.IsWhite))
+                if ((!clicked.IsEmpty)&&(view.board.whiteToPlay == clicked.Piece.IsWhite))
             {
                 stored = clicked;
                 hasStored = true;
-                    TV.Text = "Stored "+stored.Piece.Notation+" in " + stored.TileName;
 
             }else if (hasStored){
-                    TV.Text = "Trying to move " + stored.Piece.Notation + " from " + stored.TileName + " to " + clicked.TileName+"Switching turn";
-            //        board.whiteToPlay = !board.whiteToPlay;
 
              //       if (stored.Piece.PossibleMoves.Contains(clicked)){
-                        board.Move( stored, clicked);
+                        view.board.Move( stored, clicked);
               //      }
                     stored = null;
                     hasStored = false;
-             }
-                View.Refresh(board);
-                board.Revalidate();
+             }//No need for else...trust me
+                view.board.Revalidate(stored);
+                view.Refresh();
             };
         }
         public EventHandler TileClickedTest(ImageButton TileClicked,TextView TV)
