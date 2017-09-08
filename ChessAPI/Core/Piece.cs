@@ -35,10 +35,29 @@ namespace ChessAPI
         /// <value>
         /// The possible moves.
         /// </value>
-        //TODO encapsulate
-        public HashSet<Tile> PossibleMoves { get { return _possibleMoves; } }
+        public List<Tile> PossibleMoves { get { return _possibleMoves.ToList(); } }
+        public bool CanMoveTo(Tile t){
+            return (_possibleMoves.Contains(t));
+        }
         protected HashSet<Tile> _possibleMoves;
-        public abstract void CalculatePossibleMoves(Tile location, Board board);
-        public abstract HashSet<Tile> FindPossibleMoves(Tile location, Board board);
+        public void StorePossibleMoves(Tile location, Board board) {
+            _possibleMoves = new HashSet<Tile>();
+            foreach (Tile tile in CalculateAllPossibleMoves(location, board, true)) {
+                _possibleMoves.Add(tile);
+            }
+        }
+
+        public IEnumerable<Tile> FindPossibleMoves(Tile location, Board board) {
+            foreach(Tile tile in CalculateAllPossibleMoves(location, board, true)) {
+                yield return tile;
+            }
+        }
+
+        public IEnumerable<Tile> FindAllPossibleMoves(Tile location, Board board) {
+            foreach (Tile tile in CalculateAllPossibleMoves(location, board, false)) {
+                yield return tile;
+            }
+        }
+        protected abstract IEnumerable<Tile> CalculateAllPossibleMoves(Tile location, Board board, bool legalOnly);
     }
 }

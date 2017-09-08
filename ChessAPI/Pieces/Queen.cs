@@ -8,13 +8,9 @@ namespace ChessAPI
     public class Queen : Piece
     {
         public Queen(bool isWhite) : base(isWhite,'Q') { }
-        public override void CalculatePossibleMoves(Tile location, Board board) { }
-
-        public override HashSet<Tile> FindPossibleMoves(Tile location, Board board)
-        {
-            throw new NotImplementedException();
+        protected override IEnumerable<Tile> CalculateAllPossibleMoves(Tile location, Board board, bool legalOnly) {
+            return new HashSet<Tile>();
         }
-
 
     }
 }

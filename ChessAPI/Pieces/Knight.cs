@@ -8,11 +8,8 @@ namespace ChessAPI
     public class Knight : Piece
     {
         public Knight(bool isWhite) : base(isWhite,'N') { }
-        public override void CalculatePossibleMoves(Tile location, Board board) { }
-
-        public override HashSet<Tile> FindPossibleMoves(Tile location, Board board)
-        {
-            throw new NotImplementedException();
+        protected override IEnumerable<Tile> CalculateAllPossibleMoves(Tile location, Board board, bool legalOnly) {
+            return new HashSet<Tile>();
         }
 
 

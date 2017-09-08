@@ -30,24 +30,27 @@ namespace Play_Brix
                 //and if it's not empty
                 if ((!clicked.IsEmpty)&&(view.board.whiteToPlay == clicked.Piece.IsWhite))
             {
+                   
                 stored = clicked;
                 hasStored = true;
-
-            }else if (hasStored){
+                    view.board.Revalidate(stored);
+                }
+                else if (hasStored){
 
              //       if (stored.Piece.PossibleMoves.Contains(clicked)){
                         view.board.Move( stored, clicked);
               //      }
                     stored = null;
                     hasStored = false;
+                    view.board.ClearHighlights();
              }//No need for else...trust me
-                view.board.Revalidate(stored);
+                
                 view.Refresh();
             };
         }
-        public EventHandler TileClickedTest(ImageButton TileClicked,TextView TV)
+        public EventHandler TileClickedTest(Board board,TextView TV)
         {
-            return delegate { TV.Text= TileClicked.Id.ToString(); };
+            return delegate { TV.Text = (board.PrevMoves.Count!=0)?board.PrevMoves.Peek().Notation:"Start of Game"; };
         }
 
            

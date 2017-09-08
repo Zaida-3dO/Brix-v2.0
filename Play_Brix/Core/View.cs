@@ -44,6 +44,9 @@ namespace Play_Brix
         //Platform Specific Code, if Images are Updated, Update Here
         static int ImageFor(Tile tile)
         {
+            if (tile.IsHighlighted) {
+                return 2130837511;
+            }
             if (tile.IsEmpty)
             {
                 if (tile.IsHighlighted)

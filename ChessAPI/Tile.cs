@@ -39,7 +39,6 @@ namespace ChessAPI
             _piece = piece;
             _isEmpty = false;
         }
-     
         public Tile(int rank, int file, bool castle,Piece piece):this(rank,file)
         {
             _canCastle = castle;
@@ -49,6 +48,19 @@ namespace ChessAPI
         public Tile(int rank, int file,bool castle):this(rank,file)
         {
             _canCastle = castle;
+        }
+        public Tile(Tile tile)
+        {
+            _piece = tile._piece;
+            _rank = tile._rank;
+            _fileAsNum = tile._fileAsNum;
+            _file = tile._file;
+            _isEmpty = tile._isEmpty;
+            CanCaptureEnpassant = tile.CanCaptureEnpassant;
+            _canCastle = tile._canCastle;
+            IsHighlighted = tile.IsHighlighted;
+            _tileName = tile._tileName;
+            _isLightSquare = tile._isLightSquare;
         }
         /// <summary>
         /// Gets the piece currently on the Tile.
@@ -131,14 +143,13 @@ namespace ChessAPI
         public bool CanCastle { get { return _canCastle; } }
         bool _canCastle;
         public void LostCastleRights() { if(_canCastle)_canCastle = false; }
-
-
-
-        // public Tuple<bool,bool> IsHesafe;
-        public bool IsWhiteSafeHere { get { return _isWhiteSafe; } }
         bool _isWhiteSafe;
-        public bool IsBlackSafeHere { get { return _isBlackSafe; } }
         bool _isBlackSafe;
+        public bool IsSafeHere(bool CheckWhite) {
+            if (CheckWhite)
+                return _isWhiteSafe;
+            return _isBlackSafe;
+        }
         public void NotSafeFor(bool NotSafeForWhite)
         {
             if (NotSafeForWhite)
@@ -197,7 +208,6 @@ namespace ChessAPI
         {
             this._piece = p;
             _isEmpty = false;
-            //TODO Check if Promoting
         }
     }
 }
