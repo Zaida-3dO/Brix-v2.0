@@ -3,10 +3,10 @@ using Android.Widget;
 using Android.OS;
 using ChessAPI;
 using System.Collections.Generic;
-
-namespace Play_Brix
+using Play_Brix;
+namespace Brix
 {
-    [Activity(Label = "Play_Brix", MainLauncher = true)]
+    [Activity(Label = "Brix", MainLauncher = true)]
     public class MainActivity : Activity
     {
       //  static int count = 0;
@@ -14,11 +14,11 @@ namespace Play_Brix
         {
             base.OnCreate(savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Play_Brix.Resource.Layout.Main);
 
             //Tests
-            ImageButton yourBtn = (ImageButton)FindViewById(Resource.Id.imageImageButton1);
-            TextView inn = (TextView)FindViewById(Resource.Id.textView1);
+            ImageButton yourBtn = (ImageButton)FindViewById(Play_Brix.Resource.Id.imageImageButton1);
+            TextView inn = (TextView)FindViewById(Play_Brix.Resource.Id.textView1);
             ButtonListener bl = new ButtonListener(null);
                 Board board = new Board();
                 yourBtn.Click += bl.TileClickedTest(board, inn);

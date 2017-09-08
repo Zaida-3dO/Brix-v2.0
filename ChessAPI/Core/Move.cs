@@ -69,13 +69,13 @@ namespace ChessAPI
                     Notation += "e.n";
                 }
                 if (Promote != ' ') {
-                    Notation += Promote.ToString();
+                    Notation += "="+Promote.ToString();
                 }
             }
             if (Checkmate) {
                 Notation += "#";
             }else if (Stalemate) {
-                Notation += "=";
+                Notation += "-";
                 //TODO check if = is stalemate
             } else if(Check) {
                 Notation += "+";

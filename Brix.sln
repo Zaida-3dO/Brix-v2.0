@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessAPI", "ChessAPI\ChessAPI.csproj", "{5FA397B2-7840-405B-A192-43C712CA9047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Play_Brix", "Play_Brix\Play_Brix.csproj", "{B93283EF-6538-479F-B855-1BD8815BA8EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brix", "Play_Brix\Brix.csproj", "{B93283EF-6538-479F-B855-1BD8815BA8EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessAPI.Test", "ChessAPI.Test\ChessAPI.Test.csproj", "{8E8914FE-75A1-4694-AC48-A507B6C37A2E}"
 EndProject

@@ -65,13 +65,13 @@ namespace Play_Brix
 			public const int bluerook = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int Icon = 2130837510;
+			public const int Error = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int point = 2130837511;
+			public const int icon = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int shot = 2130837512;
+			public const int point = 2130837512;
 			
 			// aapt resource value: 0x7f020009
 			public const int Transparent = 2130837513;

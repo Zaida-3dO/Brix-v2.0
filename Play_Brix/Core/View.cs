@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using ChessAPI;
 
-namespace Play_Brix
+namespace Brix
 {
     public class View
     {
@@ -44,14 +44,12 @@ namespace Play_Brix
         //Platform Specific Code, if Images are Updated, Update Here
         static int ImageFor(Tile tile)
         {
-            if (tile.IsHighlighted) {
-                return 2130837511;
-            }
+            
             if (tile.IsEmpty)
             {
                 if (tile.IsHighlighted)
                 {
-                    return 2130837511;
+                    return 2130837512;
                 }
                 return 2130837513;
             }else if (tile.Piece.Notation == 'P'){
@@ -101,7 +99,7 @@ namespace Play_Brix
                 }
                 return 2130837505;
             }
-            return 2130837512;
+            return 2130837510;
         }
         public static string NameOfId(int id)
         {

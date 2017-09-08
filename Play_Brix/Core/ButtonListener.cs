@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using ChessAPI;
-namespace Play_Brix
+namespace Brix
 {
     public class ButtonListener
     {
